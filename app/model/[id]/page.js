@@ -24,7 +24,7 @@ const ModelPage = () => {
   }, [id]); // The useEffect will run when `id` changes (i.e., when the page is loaded).
 
   return (
-    <div className='h-screen w-full'>
+    <div className='h-screen overflow-hidden w-full'>
       {modelUrl && <ModelViewer modelUrl={modelUrl} />}
     </div>
   );

@@ -10,7 +10,6 @@ const ModelViewer = ({
   const modelViewerRef = useRef(null);
   const [isArSupported, setIsArSupported] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [viewMode, setViewMode] = useState('3d'); // 'ar' or '3d'
 
   useEffect(() => {
     const modelViewer = modelViewerRef.current;
@@ -55,43 +54,24 @@ const ModelViewer = ({
     };
   }, [modelUrl]);
 
-  // Toggle between 3D and AR modes
-  const handleViewModeToggle = () => {
-    setViewMode(prevMode => prevMode === '3d' ? 'ar' : '3d');
-  };
-
   return (
     <div className="relative w-[90%] h-screen mx-auto">
-      {/* View Mode Toggle */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 bg-white/80 rounded-full p-1 flex items-center">
-        <button
-          onClick={handleViewModeToggle}
-          className={`px-4 py-2 rounded-full transition-colors ${
-            viewMode === '3d' 
-              ? 'bg-blue-500 text-white' 
-              : 'bg-transparent text-gray-700 hover:bg-gray-200'
-          }`}
+      {/* AR Button in Top Right Corner */}
+      {isArSupported && (
+        <button 
+          slot="ar-button" 
+          className="absolute top-4 right-4 z-10 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
         >
-          3D
+          View in Your Space
         </button>
-        <button
-          onClick={handleViewModeToggle}
-          className={`px-4 py-2 rounded-full transition-colors ${
-            viewMode === 'ar' 
-              ? 'bg-blue-500 text-white' 
-              : 'bg-transparent text-gray-700 hover:bg-gray-200'
-          }`}
-        >
-          AR
-        </button>
-      </div>
+      )}
 
       <model-viewer
         ref={modelViewerRef}
         src={modelUrl}
         
         // AR Specific Attributes
-        ar={viewMode === 'ar'}
+        ar
         ar-modes="webxr scene-viewer quick-look"
         ar-scale="fixed"
         camera-controls
@@ -117,16 +97,6 @@ const ModelViewer = ({
             style={{ width: `${loadingProgress}%` }}
           ></div>
         </div>
-
-        {/* AR Button with Conditional Rendering */}
-        {isArSupported && viewMode === 'ar' && (
-          <button 
-            slot="ar-button" 
-            className="ar-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            View in Your Space
-          </button>
-        )}
 
         {/* Fallback Content for Non-AR Devices */}
         <div slot="no-ar" className="text-center p-4">
