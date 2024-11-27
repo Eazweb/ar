@@ -1,82 +1,128 @@
 'use client'
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { AES } from 'crypto-js';
+import { Inter } from 'next/font/google';
 
-import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+// Configure Inter font with specific subsets and weights
+const inter = Inter({ 
+  subsets: ['latin'], 
+  weight: ['400', '600', '700'] 
+});
 
-const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
-const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
-const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
-const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
-  ssr: false,
-  loading: () => (
-    <div className='flex h-96 w-full flex-col items-center justify-center'>
-      <svg className='-ml-1 mr-3 h-5 w-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
-        <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
-        <path
-          className='opacity-75'
-          fill='currentColor'
-          d='M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-        />
-      </svg>
-    </div>
-  ),
-})
-const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
+const MainPage = () => {
+  const [models, setModels] = useState([]);
 
-export default function Page() {
+  useEffect(() => {
+    const fetchModels = async () => {
+      const modelData = [
+        {
+          id: 1,
+          name: 'Perfume Bottle',
+          previewUrl: 'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/sauvage_perfume.glb?updatedAt=1732625954590',
+        },
+        {
+          id: 2,
+          name: 'Hoody',
+          previewUrl: 'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/oversized_sweater.glb?updatedAt=1732625985227',
+        },
+        {
+          id: 3,
+          name: 'Statue',
+          previewUrl:
+            'https://res.cloudinary.com/dzrsboari/image/upload/v1732206757/Addune_Hindu_God_Lord_Ganesha_Idol_Indian_Statue_djrbgv.glb',
+        },
+        {
+          id: 4,
+          name: 'Chair',
+          previewUrl:
+            'https://res.cloudinary.com/dzrsboari/image/upload/v1732354734/arm_chair__furniture_xtxndx.glb',
+        },
+        {
+          id: 5,
+          name: 'Clock',
+          previewUrl:
+            'https://res.cloudinary.com/dzrsboari/image/upload/v1732354804/victorian_clock_clj5r3.glb',
+        },
+        {
+          id: 6,
+          name: 'Statue',
+          previewUrl:
+            'https://res.cloudinary.com/dzrsboari/image/upload/v1732354734/arm_chair__furniture_xtxndx.glb',
+        },
+        {
+          id: 7,
+          name: 'Pizza',
+          previewUrl:
+            'https://res.cloudinary.com/dzrsboari/image/upload/v1732355573/pizza_xgkgo4.glb',
+        },
+        {
+          id: 8,
+          name: 'Wooden Plate',
+          previewUrl:
+            'https://res.cloudinary.com/dzrsboari/image/upload/v1732355573/pizza_xgkgo4.glb',
+        },
+        {
+          id: 9,
+          name: 'Burger',
+          previewUrl:
+            'https://res.cloudinary.com/dzrsboari/image/upload/v1732523716/burgerhahaa_mk5bfi.glb',
+        },
+        {
+          id: 10,
+          name: 'gmpdfg',
+          previewUrl:
+            'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/KFC,%20zinger%20burger%20photogrammetry.glb?updatedAt=1732624718119',
+        },
+        {
+          id: 11,
+          name: 'wowowoow',
+          previewUrl:
+            'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/Small%20pizza%20photogrammetry.glb?updatedAt=1732624905419',
+        },
+      ]
+      setModels(modelData);
+    };
+
+    fetchModels();
+  }, []);
+
   return (
-    <>
-      <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
-        {/* jumbo */}
-        <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
-          <p className='w-full uppercase'>Next + React Three Fiber</p>
-          <h1 className='my-4 text-5xl font-bold leading-tight'>Next 3D Starter</h1>
-          <p className='mb-8 text-2xl leading-normal'>A minimalist starter for React, React-three-fiber and Threejs.</p>
-        </div>
-
-        <div className='w-full text-center md:w-3/5'>
-          <View className='flex h-96 w-full flex-col items-center justify-center'>
-            <Suspense fallback={null}>
-              <Logo route='/blob' scale={0.6} position={[0, 0, 0]} />
-              <Common />
-            </Suspense>
-          </View>
-        </div>
-      </div>
-
-      <div className='mx-auto flex w-full flex-col flex-wrap items-center p-12 md:flex-row  lg:w-4/5'>
-        {/* first row */}
-        <div className='relative h-48 w-full py-6 sm:w-1/2 md:my-12 md:mb-40'>
-          <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Events are propagated</h2>
-          <p className='mb-8 text-gray-600'>Drag, scroll, pinch, and rotate the canvas to explore the 3D scene.</p>
-        </div>
-        <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
-          <View orbit className='relative h-full  sm:h-48 sm:w-full'>
-            <Suspense fallback={null}>
-              <Dog scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
-              <Common color={'lightpink'} />
-            </Suspense>
-          </View>
-        </div>
-        {/* second row */}
-        <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
-          <View orbit className='relative h-full animate-bounce sm:h-48 sm:w-full'>
-            <Suspense fallback={null}>
-              <Duck route='/blob' scale={2} position={[0, -1.6, 0]} />
-              <Common color={'lightblue'} />
-            </Suspense>
-          </View>
-        </div>
-        <div className='w-full p-6 sm:w-1/2'>
-          <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Dom and 3D are synchronized</h2>
-          <p className='mb-8 text-gray-600'>
-            3D Divs are renderer through the View component. It uses gl.scissor to cut the viewport into segments. You
-            tie a view to a tracking div which then controls the position and bounds of the viewport. This allows you to
-            have multiple views with a single, performant canvas. These views will follow their tracking elements,
-            scroll along, resize, etc.
-          </p>
+    <div className={`${inter.className}  min-h-screen w-[90%] mx-auto max-w-[1500px]`}>
+      <div className="container mx-auto">
+        <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
+          3D Model Gallery
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-8">
+          {models.map((model) => {
+            const encryptedUrl = encodeURIComponent(AES.encrypt(model.previewUrl, 'secret-key').toString());
+            return (
+              <Link 
+                key={model.id} 
+                href={`/model/${encryptedUrl}`} 
+                className="group"
+              >
+                <div className="w-[90%] rounded-lg aspect-square shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl ">
+                  <div className=" flex items-center justify-center p-4">
+                    <img 
+                      src={model.previewUrl} 
+                      alt={model.name} 
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                  <div className="p-4 bg-gray-100">
+                    <h3 className="text-lg font-semibold text-gray-800 text-center group-hover:text-blue-600 transition-colors">
+                      {model.name}
+                    </h3>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
+
+export default MainPage;
