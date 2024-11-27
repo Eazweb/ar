@@ -85,7 +85,7 @@ const ModelViewer = ({
         alt={`3D model of ${name}`}
         style={{
           width: '100%',
-          height: '100%',
+          height: '90%',
           maxWidth: '100%',
           backgroundColor: '#f0f0f0'
         }}
