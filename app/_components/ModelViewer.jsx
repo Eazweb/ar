@@ -55,7 +55,7 @@ const ModelViewer = ({
   }, [modelUrl]);
 
   return (
-    <div className="relative w-[90%] h-screen mx-auto">
+    <div className="relative w-[90%] h-screen mx-auto my-auto rounded-lg">
       {/* AR Button in Top Right Corner */}
       {/* {isArSupported && (
         <button 
