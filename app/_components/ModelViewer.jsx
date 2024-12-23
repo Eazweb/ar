@@ -6,14 +6,14 @@ const ModelViewer = ({ modelUrl, posterUrl, name = '3D Model', modelWidth = 0 })
   const modelViewerRef = useRef(null)
   const [isArSupported, setIsArSupported] = useState(false)
   const [loadingProgress, setLoadingProgress] = useState(0)
-  const [arScale, setArScale] = useState(1)
+  const [fixedArScale, setFixedArScale] = useState(1) // State to hold the fixed AR scale
 
   useEffect(() => {
     const modelViewer = modelViewerRef.current
 
     const handleLoad = () => {
       console.log('Model loaded successfully')
-      updateArScale()
+      calculateFixedArScale()
     }
 
     const handleError = (event) => {
@@ -25,20 +25,15 @@ const ModelViewer = ({ modelUrl, posterUrl, name = '3D Model', modelWidth = 0 })
       setLoadingProgress(progressBar)
     }
 
-    const updateArScale = () => {
+    const calculateFixedArScale = () => {
       if (modelViewer && modelWidth > 0) {
-        // Safely check if updateBoundingBox exists before calling it
         if (typeof modelViewer.updateBoundingBox === 'function') {
           modelViewer.updateBoundingBox()
           const boundingBox = modelViewer.getBoundingBox()
           const modelWidthInMeters = modelWidth / 1000
-          const modelWidthScale = modelWidthInMeters / (boundingBox.max.x - boundingBox.min.x)
-
-          setArScale(modelWidthScale)
-          console.log('model Width is:', modelWidth)
-          console.log('scaled width is:', modelWidthInMeters)
-          console.log('Bounding Box X:', boundingBox.max.x - boundingBox.min.x)
-          console.log('ArScale', modelWidthScale)
+          const calculatedScale = modelWidthInMeters / (boundingBox.max.x - boundingBox.min.x)
+          setFixedArScale(calculatedScale)
+          console.log('Fixed AR Scale:', calculatedScale)
         } else {
           console.warn('modelViewer.updateBoundingBox is not available yet.')
         }
@@ -78,7 +73,7 @@ const ModelViewer = ({ modelUrl, posterUrl, name = '3D Model', modelWidth = 0 })
         // AR Specific Attributes
         ar
         ar-modes='webxr scene-viewer quick-look'
-        ar-scale={arScale}
+        ar-scale={fixedArScale}
         camera-controls
         // Rendering and Performance
         tone-mapping='neutral'
