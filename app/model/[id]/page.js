@@ -1,33 +1,34 @@
 'use client'
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation'; // Import useParams
-import { AES, enc } from 'crypto-js'; // Import AES and the encoding module
-import ModelViewer from '@/_components/ModelViewer';
+import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import { AES, enc } from 'crypto-js'
+import ModelViewer from '@/_components/ModelViewer'
 
 const ModelPage = () => {
-  const { id } = useParams(); // Get the id directly from the URL parameters
-  const [modelUrl, setModelUrl] = useState('');
+  const { id } = useParams()
+  const [modelUrl, setModelUrl] = useState('')
+  const [modelWidth, setModelWidth] = useState(0)
 
   useEffect(() => {
-    if (!id) return; // If the id is not available, do nothing.
+    if (!id) return
 
     try {
-      // Decode the URL before decrypting
-      const decodedUrl = decodeURIComponent(id);
-      // Decrypt the URL
-      const decryptedUrl = AES.decrypt(decodedUrl, 'secret-key').toString(enc.Utf8); // Use enc.Utf8 from the imported enc module
-      setModelUrl(decryptedUrl); // Set the decrypted URL to state
-      console.log(decryptedUrl); // Log the decrypted URL for debugging
+      const decodedUrl = decodeURIComponent(id)
+      const [encryptedPart, widthPart] = decodedUrl.split('+')
+
+      const decryptedUrl = AES.decrypt(encryptedPart, 'secret-key').toString(enc.Utf8)
+      setModelUrl(decryptedUrl)
+      setModelWidth(Number(widthPart) || 0)
     } catch (error) {
-      console.error('Error decoding model link:', error);
+      console.error('Error decoding model link:', error)
     }
-  }, [id]); // The useEffect will run when `id` changes (i.e., when the page is loaded).
+  }, [id])
 
   return (
     <div className='h-[100vh] overflow-hidden w-full'>
-      {modelUrl && <ModelViewer modelUrl={modelUrl} />}
+      {modelUrl && <ModelViewer modelUrl={modelUrl} modelWidth={modelWidth} />}
     </div>
-  );
-};
+  )
+}
 
-export default ModelPage;
+export default ModelPage
