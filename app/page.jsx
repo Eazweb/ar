@@ -2,8 +2,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { AES } from 'crypto-js'
-import { Inter } from 'next/font/google'
-import { Protest_Strike } from 'next/font/google'
+import { Inter, Montserrat, Protest_Strike } from 'next/font/google'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -14,6 +13,11 @@ const heroFont = Protest_Strike({
   subsets: ['latin'],
   weight: '400',
   display: 'swap',
+})
+
+const main_font = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '600', '800'],
 })
 
 const MainPage = () => {
@@ -59,13 +63,6 @@ const MainPage = () => {
           width: 300, // mm
         },
         {
-          id: 6,
-          name: 'God Statue',
-          imgsrc: '/img/statue.png',
-          previewUrl: 'https://res.cloudinary.com/dzrsboari/image/upload/v1732354734/arm_chair__furniture_xtxndx.glb',
-          width: 100, // mm
-        },
-        {
           id: 7,
           name: 'Cheese Pizza',
           imgsrc: '/img/pizza.png',
@@ -97,9 +94,9 @@ const MainPage = () => {
   }, [])
 
   return (
-    <div className={`${inter.className} min-h-screen w-[90%] mx-auto max-w-[1500px]`}>
+    <div className={`${main_font.className} min-h-screen w-[90%] mx-auto max-w-[1500px]`}>
       <div className='container mx-auto'>
-        <h1 className='text-4xl font-bold text-gray-800 mb-8 text-center'>3D Model Gallery</h1>
+        <h1 className='text-4xl font-extrabold text-gray-800 mb-8 text-center my-5 '>3D Model Gallery</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-12'>
           {models.map((model) => {
             const encryptedUrl = encodeURIComponent(
