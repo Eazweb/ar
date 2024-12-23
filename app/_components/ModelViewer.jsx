@@ -27,18 +27,21 @@ const ModelViewer = ({ modelUrl, posterUrl, name = '3D Model', modelWidth = 0 })
 
     const updateArScale = () => {
       if (modelViewer && modelWidth > 0) {
-        //Get the bounding box dimensions when the model loads to calculate aspect ratio
-        modelViewer.updateBoundingBox()
-        const boundingBox = modelViewer.getBoundingBox()
-        const modelWidthInMeters = modelWidth / 1000
-        const modelWidthScale = modelWidthInMeters / (boundingBox.max.x - boundingBox.min.x)
+        // Safely check if updateBoundingBox exists before calling it
+        if (typeof modelViewer.updateBoundingBox === 'function') {
+          modelViewer.updateBoundingBox()
+          const boundingBox = modelViewer.getBoundingBox()
+          const modelWidthInMeters = modelWidth / 1000
+          const modelWidthScale = modelWidthInMeters / (boundingBox.max.x - boundingBox.min.x)
 
-        //Scale according to the width, preserving aspect ratio
-        setArScale(modelWidthScale)
-        console.log('model Width is:', modelWidth)
-        console.log('scaled width is:', modelWidthInMeters)
-        console.log('Bounding Box X:', boundingBox.max.x - boundingBox.min.x)
-        console.log('ArScale', modelWidthScale)
+          setArScale(modelWidthScale)
+          console.log('model Width is:', modelWidth)
+          console.log('scaled width is:', modelWidthInMeters)
+          console.log('Bounding Box X:', boundingBox.max.x - boundingBox.min.x)
+          console.log('ArScale', modelWidthScale)
+        } else {
+          console.warn('modelViewer.updateBoundingBox is not available yet.')
+        }
       }
     }
 

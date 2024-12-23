@@ -14,7 +14,7 @@ const ModelPage = () => {
 
     try {
       const decodedUrl = decodeURIComponent(id)
-      const [encryptedPart, widthPart] = decodedUrl.split('+')
+      const [encryptedPart, widthPart] = decodedUrl.split('@')
 
       const decryptedUrl = AES.decrypt(encryptedPart, 'secret-key').toString(enc.Utf8)
       setModelUrl(decryptedUrl)

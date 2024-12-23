@@ -62,8 +62,8 @@ const MainPage = () => {
           id: 6,
           name: 'God Statue',
           imgsrc: '/img/statue.png',
-          width: 100, // mm
           previewUrl: 'https://res.cloudinary.com/dzrsboari/image/upload/v1732354734/arm_chair__furniture_xtxndx.glb',
+          width: 100, // mm
         },
         {
           id: 7,
@@ -103,7 +103,7 @@ const MainPage = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-12'>
           {models.map((model) => {
             const encryptedUrl = encodeURIComponent(
-              AES.encrypt(model.previewUrl, 'secret-key').toString() + `+${model.width}`,
+              AES.encrypt(model.previewUrl, 'secret-key').toString() + `@` + `${model.width}`,
             )
             return (
               <Link key={model.id} href={`/model/${encryptedUrl}`} className='group'>
