@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { AES } from 'crypto-js'
 import { Inter, Montserrat, Protest_Strike } from 'next/font/google'
@@ -48,6 +48,7 @@ const MainPage = () => {
             'https://res.cloudinary.com/dzrsboari/image/upload/v1732206757/Addune_Hindu_God_Lord_Ganesha_Idol_Indian_Statue_djrbgv.glb',
           width: 200, // mm
         },
+
         {
           id: 4,
           name: 'Comfy Chair',
@@ -69,7 +70,6 @@ const MainPage = () => {
           previewUrl: 'https://res.cloudinary.com/dzrsboari/image/upload/v1732355573/pizza_xgkgo4.glb',
           width: 250, // mm
         },
-
         {
           id: 10,
           name: 'Chicken burger',
@@ -85,6 +85,28 @@ const MainPage = () => {
           previewUrl:
             'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/Small%20pizza%20photogrammetry.glb?updatedAt=1732624905419',
           width: 350, // mm
+        },
+        {
+          id: 12,
+          name: 'Table Lamp',
+          imgsrc: '/img/lamp.png',
+          previewUrl:
+            'https://res.cloudinary.com/dzrsboari/image/upload/v1735024791/lamp__marble_base__free_eiliut.glb',
+          width: 200, // mm
+        },
+        {
+          id: 13,
+          name: 'Gaming Chair',
+          imgsrc: '/img/gamingchair.png',
+          previewUrl: 'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/gaming_chair.glb?updatedAt=1735025357211',
+          width: 200, // mm
+        },
+        {
+          id: 14,
+          name: 'Enerfy Drinks',
+          imgsrc: '/img/drink.png',
+          previewUrl: 'https://res.cloudinary.com/dzrsboari/image/upload/v1735026531/monster_energy_drink_xg0ybs.glb',
+          width: 200, // mm
         },
       ]
       setModels(modelData)
