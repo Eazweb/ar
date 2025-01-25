@@ -105,8 +105,7 @@ export const modelData = [
     id: 18,
     name: 'cream bottle',
     imgsrc: '/img/drindffhdfhk.png',
-    previewUrl:
-      'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/under_eye%20cream%20bottle.glb?updatedAt=1737795532273',
+    previewUrl: 'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/bottle%20model.glb?updatedAt=1737798004196',
     width: 200, // mm
   },
 ]
