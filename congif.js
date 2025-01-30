@@ -108,4 +108,46 @@ export const modelData = [
     previewUrl: 'https://ik.imagekit.io/d6qn2w0aj/eazweb%20models/bottle%20model.glb?updatedAt=1737798004196',
     width: 200, // mm
   },
+  {
+    id: 19,
+    name: 'Suns Cream lotion bottle',
+    imgsrc: '/img/drindffhdfhk.png',
+    previewUrl: 'https://res.cloudinary.com/dzrsboari/image/upload/v1738227526/sunscreen_lotion_bottle_xigkd5.glb',
+    width: 200, // mm
+  },
+  {
+    id: 20,
+    name: 'Face serum bottle',
+    imgsrc: '/img/drindffhdfhk.png',
+    previewUrl: 'https://res.cloudinary.com/dzrsboari/image/upload/v1738227516/face_serum_bottle_vlxrgq.glb',
+    width: 200, // mm
+  },
+  {
+    id: 21,
+    name: 'Face serum box',
+    imgsrc: '/img/drindffhdfhk.png',
+    previewUrl: 'https://res.cloudinary.com/dzrsboari/image/upload/v1738227517/face_serum_box_2_f6wpqx.glb',
+    width: 200, // mm
+  },
+  {
+    id: 22,
+    name: 'Face wash bottle',
+    imgsrc: '/img/drindffhdfhk.png',
+    previewUrl: 'https://res.cloudinary.com/dzrsboari/image/upload/v1738227516/facewash_bottle_jst1vw.glb',
+    width: 200, // mm
+  },
+  {
+    id: 23,
+    name: 'Suns cream box',
+    imgsrc: '/img/drindffhdfhk.png',
+    previewUrl: 'https://ik.imagekit.io/gdtckmwj5/eaazweb%20models/sunscreen_box.glb?updatedAt=1738227730453',
+    width: 200, // mm
+  },
+  {
+    id: 24,
+    name: 'Face wash box',
+    imgsrc: '/img/drindffhdfhk.png',
+    previewUrl: 'https://ik.imagekit.io/gdtckmwj5/eaazweb%20models/facewash%20box.glb?updatedAt=1738227730083',
+    width: 200, // mm
+  },
 ]
